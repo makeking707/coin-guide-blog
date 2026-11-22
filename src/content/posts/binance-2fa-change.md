@@ -70,6 +70,5 @@ OTP 기기를 잃어버려도 패스키가 등록된 다른 기기가 있으면 
 - [바이낸스 가입 방법 총정리 (보안 설정 포함)](../binance-signup-guide/)
 - [출금 주소 등록(화이트리스트) 방법](../withdrawal-address-low-fee-coins/)
 - [출금·입금이 지연될 때 확인할 것](../withdrawal-delay-checklist/)
-- 바이비트도 함께 쓴다면: [바이비트 가입 방법과 본인 인증 실패 해결](../bybit-signup-guide/)
 
 <!-- 캡처 이미지 추가 권장: 계정 → 보안 → 인증 앱 화면, 수정 아이콘 위치 -->
