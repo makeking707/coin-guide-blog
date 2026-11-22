@@ -13,7 +13,7 @@
 4. **GitHub Pages 켜기** — 저장소 Settings → Pages → Source 를 *GitHub Actions* 로 설정해요. 그다음 Actions 탭에서 *Deploy* 를 다시 실행(Re-run)하면 `https://makeking707.github.io/coin-guide-blog/` 로 배포돼요. 이후에는 main 에 푸시할 때마다 자동 배포돼요.
 5. **(선택) 도메인 연결** — 도메인을 사면 Settings → Pages → Custom domain 에 입력하고, Settings → Secrets and variables → Actions → Variables 에 `SITE_URL`(예: `https://coinguide.example.com`)과 `BASE_PATH`(`/`)를 등록해요. 도메인 이름에 거래소 상표(binance, bybit 등)는 넣지 마세요.
 6. **구글 서치콘솔 등록** — 사이트 소유 확인 후 `사이트주소/sitemap-index.xml` 을 제출해요. 인증 태그는 `src/layouts/Base.astro` 의 주석 위치에 넣어요.
-7. **캡처 이미지 추가** — 각 글의 `<!-- 캡처 이미지 추가 권장 -->` 주석 위치에 실제 화면 캡처를 넣으면 신뢰도와 검색 순위에 도움이 돼요. 이미지는 `public/images/` 에 넣고 `![설명](/images/파일명.png)` 으로 써요.
+7. **캡처 이미지 추가** — 각 글의 `<!-- 캡처 이미지 추가 권장 -->` 주석 위치에 실제 화면 캡처를 넣으면 신뢰도와 검색 순위에 도움이 돼요. 이미지는 `src/content/posts/images/` 에 넣고 글에서 `![설명](./images/파일명.png)` 으로 써요. (자동으로 용량이 최적화돼요)
 
 ## 내 컴퓨터에서 실행
 
