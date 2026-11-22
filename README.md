@@ -10,11 +10,8 @@
    - `benefit`(가입자 혜택)은 **공식 페이지에서 직접 확인한 내용만** 적고, `checkedAt` 에 확인 날짜를 적어요.
    - 링크를 비워 두면 해당 거래소의 추천 박스와 광고 고지는 자동으로 숨겨져요.
 3. **사이트 정보 수정** — `src/config.ts` 의 `SITE`(사이트 이름, 문의 이메일)를 바꿔요.
-4. **독립 저장소 만들기** — GitHub에서 새 저장소를 만들고 이 폴더 내용을 루트에 올려요.
-5. **배포** — 저장소 Settings → Pages → Source 를 *GitHub Actions* 로 설정해요. (`.github/workflows/deploy.yml` 이 자동 배포)
-   - 도메인을 연결하면 Settings → Secrets and variables → Actions → Variables 에 `SITE_URL` 을 등록해요.
-   - 도메인 없이 `https://아이디.github.io/저장소명` 으로 쓸 때는 `BASE_PATH=/저장소명` 도 등록해요.
-   - 도메인 이름에 거래소 상표(binance, bybit 등)는 넣지 마세요.
+4. **GitHub Pages 켜기** — 저장소 Settings → Pages → Source 를 *GitHub Actions* 로 설정해요. 그다음 Actions 탭에서 *Deploy* 를 다시 실행(Re-run)하면 `https://makeking707.github.io/coin-guide-blog/` 로 배포돼요. 이후에는 main 에 푸시할 때마다 자동 배포돼요.
+5. **(선택) 도메인 연결** — 도메인을 사면 Settings → Pages → Custom domain 에 입력하고, Settings → Secrets and variables → Actions → Variables 에 `SITE_URL`(예: `https://coinguide.example.com`)과 `BASE_PATH`(`/`)를 등록해요. 도메인 이름에 거래소 상표(binance, bybit 등)는 넣지 마세요.
 6. **구글 서치콘솔 등록** — 사이트 소유 확인 후 `사이트주소/sitemap-index.xml` 을 제출해요. 인증 태그는 `src/layouts/Base.astro` 의 주석 위치에 넣어요.
 7. **캡처 이미지 추가** — 각 글의 `<!-- 캡처 이미지 추가 권장 -->` 주석 위치에 실제 화면 캡처를 넣으면 신뢰도와 검색 순위에 도움이 돼요. 이미지는 `public/images/` 에 넣고 `![설명](/images/파일명.png)` 으로 써요.
 
