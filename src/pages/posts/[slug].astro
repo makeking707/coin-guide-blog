@@ -1,0 +1,76 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import RiskNotice from '../../components/RiskNotice.astro';
+import ReferralBox from '../../components/ReferralBox.astro';
+import { CATEGORIES, SITE } from '../../config';
+import { activeReferrals, formatDate, getPosts, url } from '../../lib';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post, all: posts } }));
+}
+
+interface Props { post: CollectionEntry<'posts'>; all: CollectionEntry<'posts'>[] }
+const { post, all } = Astro.props;
+const { data } = post;
+const { Content } = await render(post);
+const hasAd = activeReferrals(data.exchanges).length > 0;
+const related = all.filter((p) => p.id !== post.id && p.data.category === data.category).slice(0, 3);
+const more = related.length < 3
+  ? all.filter((p) => p.id !== post.id && p.data.category !== data.category && p.data.exchanges.some((e) => data.exchanges.includes(e))).slice(0, 3 - related.length)
+  : [];
+
+const jsonLd: object[] = [{
+  '@context': 'https://schema.org', '@type': 'Article', headline: data.title, description: data.description,
+  datePublished: data.pubDate.toISOString(), dateModified: (data.updatedDate ?? data.pubDate).toISOString(),
+  author: { '@type': 'Person', name: SITE.author }, inLanguage: 'ko-KR',
+}];
+if (data.faq.length) jsonLd.push({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: data.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+});
+---
+<Base title={data.title} description={data.description} type="article" jsonLd={jsonLd}>
+  <article>
+    <p class="meta"><a href={url(`category/${data.category}/`)}>{CATEGORIES[data.category].label}</a></p>
+    <h1>{data.title}</h1>
+    <p class="meta">
+      작성 {formatDate(data.pubDate)}{data.updatedDate && <> · 수정 {formatDate(data.updatedDate)}</>}
+    </p>
+
+    {hasAd && <Disclosure />}
+
+    <div class="summary">
+      <p>3줄 요약</p>
+      <ul>{data.summary.map((s) => <li>{s}</li>)}</ul>
+    </div>
+
+    <ReferralBox exchanges={data.exchanges} variant="inline" />
+
+    <Content />
+
+    {data.faq.length > 0 && (
+      <section class="faq">
+        <h2>자주 묻는 질문</h2>
+        {data.faq.map((f) => (
+          <details><summary>{f.q}</summary><p>{f.a}</p></details>
+        ))}
+      </section>
+    )}
+
+    <ReferralBox exchanges={data.exchanges} variant="bottom" />
+
+    {(related.length + more.length) > 0 && (
+      <section>
+        <h2>함께 보면 좋은 글</h2>
+        <ul class="post-list">
+          {[...related, ...more].map((p) => <li><a href={url(`posts/${p.id}/`)}>{p.data.title}</a></li>)}
+        </ul>
+      </section>
+    )}
+
+    <RiskNotice />
+  </article>
+</Base>

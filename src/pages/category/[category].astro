@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import { CATEGORIES, type CategoryId } from '../../config';
+import { getPosts, url } from '../../lib';
+
+export function getStaticPaths() {
+  return Object.keys(CATEGORIES).map((category) => ({ params: { category } }));
+}
+const category = Astro.params.category as CategoryId;
+const info = CATEGORIES[category];
+const posts = (await getPosts()).filter((p) => p.data.category === category);
+---
+<Base title={info.label} description={`${info.label}: ${info.description}`}>
+  <h1>{info.label}</h1>
+  <p class="meta">{info.description}</p>
+  {posts.length === 0 ? <p>아직 글이 없어요.</p> : (
+    <ul class="post-list">
+      {posts.map((p) => <li><a href={url(`posts/${p.id}/`)}>{p.data.title}</a><p>{p.data.description}</p></li>)}
+    </ul>
+  )}
+</Base>

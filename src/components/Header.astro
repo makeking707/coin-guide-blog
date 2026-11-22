@@ -1,0 +1,12 @@
+---
+import { SITE, CATEGORIES } from '../config';
+import { url } from '../lib';
+---
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href={url()}>{SITE.name}</a>
+    <nav aria-label="카테고리">
+      {Object.entries(CATEGORIES).map(([id, c]) => <a href={url(`category/${id}/`)}>{c.label}</a>)}
+    </nav>
+  </div>
+</header>

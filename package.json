@@ -1,0 +1,17 @@
+{
+  "name": "coin-guide-blog",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "check:content": "node scripts/check-content.mjs",
+    "prebuild": "node scripts/check-content.mjs",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.6",
+    "astro": "5.18.2"
+  }
+}

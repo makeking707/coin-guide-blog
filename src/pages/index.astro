@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import RiskNotice from '../components/RiskNotice.astro';
+import { CATEGORIES, SITE } from '../config';
+import { getPosts, url } from '../lib';
+const posts = await getPosts();
+---
+<Base>
+  <section class="hero">
+    <h1>{SITE.name}</h1>
+    <p>{SITE.description}이에요. 수치는 직접 확인한 날짜와 함께 적어요.</p>
+  </section>
+  <div class="cards">
+    {Object.entries(CATEGORIES).map(([id, c]) => (
+      <a class="card" href={url(`category/${id}/`)}><strong>{c.label}</strong><span>{c.description}</span></a>
+    ))}
+  </div>
+  <h2>최신 글</h2>
+  <ul class="post-list">
+    {posts.map((p) => <li><a href={url(`posts/${p.id}/`)}>{p.data.title}</a><p>{p.data.description}</p></li>)}
+  </ul>
+  <RiskNotice />
+</Base>

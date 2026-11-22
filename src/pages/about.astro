@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+import { url } from '../lib';
+---
+<Base title="소개" description={`${SITE.name} 소개와 운영 원칙`}>
+  <article>
+    <h1>소개</h1>
+    <p>{SITE.name}는 가상자산 거래소의 가입 절차, 수수료 구조, 입출금 문제 해결 방법을 단계별로 정리하는 정보 사이트예요.</p>
+    <h2>운영 원칙</h2>
+    <ul>
+      <li>특정 코인의 매수·매도를 추천하지 않으며, 가격 전망이나 목표가를 제시하지 않아요.</li>
+      <li>수익을 보장하거나 과장하는 표현을 쓰지 않아요.</li>
+      <li>수수료·혜택 수치는 작성 시점에 공식 페이지에서 확인한 내용만 적고, 확인 날짜를 함께 표기해요.</li>
+      <li>추천인 링크가 있는 글에는 글 첫머리에 광고 고지를 표시해요. (<a href={url('affiliate-disclosure/')}>제휴 공개 정책</a>)</li>
+      <li>유료 리딩방, 시그널 판매, 투자 자문 서비스를 운영하지 않아요.</li>
+    </ul>
+    <h2>문의</h2>
+    <p>내용 오류 제보나 문의는 <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>로 보내 주세요.</p>
+  </article>
+</Base>

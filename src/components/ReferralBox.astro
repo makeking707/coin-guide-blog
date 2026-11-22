@@ -1,0 +1,28 @@
+---
+import type { ExchangeId } from '../config';
+import { activeReferrals } from '../lib';
+
+interface Props { exchanges: ExchangeId[]; variant?: 'inline' | 'bottom' }
+const { exchanges, variant = 'inline' } = Astro.props;
+const items = activeReferrals(exchanges);
+---
+{items.length > 0 && (
+  <section class={`referral referral-${variant}`} aria-label="추천인 링크 (광고)">
+    <p class="referral-label">광고 · 추천인 링크</p>
+    {items.map((r) => (
+      <div class="referral-item">
+        <div>
+          <strong>{r.name}</strong>
+          {r.code && <span class="referral-code">추천 코드 <code>{r.code}</code></span>}
+          {r.benefit && (
+            <p class="referral-benefit">
+              {r.benefit}
+              {r.checkedAt && <small> ({r.checkedAt} 확인 기준, 조건은 거래소 사정에 따라 바뀔 수 있어요)</small>}
+            </p>
+          )}
+        </div>
+        <a class="btn" href={r.url} rel="sponsored nofollow noopener" target="_blank">{r.name} 가입 페이지 열기</a>
+      </div>
+    ))}
+  </section>
+)}
