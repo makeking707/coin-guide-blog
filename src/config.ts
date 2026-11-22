@@ -34,8 +34,8 @@ export interface ReferralInfo {
 export const REFERRALS: Record<ExchangeId, ReferralInfo> = {
   binance: {
     name: '바이낸스',
-    url: '', // 예: https://accounts.binance.com/register?ref=XXXXXXXX
-    code: '',
+    url: 'https://www.binance.com/register?ref=48145561', // 2026-11-22 추천 대시보드 기본 링크
+    code: '48145561',
     benefit: '',
     checkedAt: '',
     feePage: 'https://www.binance.com/en/fee/schedule',
