@@ -8,8 +8,14 @@ export function url(path = ''): string {
   return `${base}/${p}`;
 }
 
+/**
+ * 공개된 글 목록. pubDate 가 미래인 글은 예약 글로 보고 숨겨요.
+ * (pubDate: 2026-11-25 → 한국 시간 11월 25일 오전 9시부터 공개. 매일 자동 빌드가 돌면서 반영돼요.)
+ */
 export async function getPosts(): Promise<CollectionEntry<'posts'>[]> {
-  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  // PREVIEW_SCHEDULED=1 npm run build → 예약 글까지 모두 포함해 미리 확인 (배포용 빌드에서는 쓰지 마세요)
+  const now = process.env.PREVIEW_SCHEDULED ? Infinity : Date.now();
+  const posts = await getCollection('posts', ({ data }) => !data.draft && data.pubDate.valueOf() <= now);
   return posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
 

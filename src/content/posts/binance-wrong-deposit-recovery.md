@@ -83,5 +83,6 @@ XRP, XLM처럼 메모(태그)가 필요한 코인을 메모 없이 보냈다면 
 
 - [업비트에서 바이낸스로 코인 보내는 법](../upbit-to-binance-transfer/)
 - [트래블룰 입금 실패 원인과 해결](../travel-rule-deposit-failed/)
+- 바이비트도 함께 쓴다면: [바이비트 가입 방법과 본인 인증 실패 해결](../bybit-signup-guide/)
 
 <!-- 캡처 이미지 추가 권장: 입금 내역의 Wrong Deposit 상태 화면, 신청 기록(Application Records) 화면 -->
