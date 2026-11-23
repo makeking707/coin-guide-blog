@@ -9,9 +9,12 @@ name: Deploy
 on:
   push:
     branches: [main]
-  # 예약 글 공개용 매일 자동 빌드 (UTC 00:10 = 한국 시간 오전 9시 10분)
+  # 예약 글 공개용 자동 빌드 — 깃허브가 예약 실행을 가끔 건너뛰어서 하루 3번 돌려요.
+  # (UTC 기준 → 한국 시간 오전 9시 17분, 오후 1시 47분, 오후 6시 37분. 정각은 깃허브가 붐벼서 피했어요.)
   schedule:
-    - cron: '10 0 * * *'
+    - cron: '17 0 * * *'
+    - cron: '47 4 * * *'
+    - cron: '37 9 * * *'
   workflow_dispatch:
 
 permissions:
