@@ -27,6 +27,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:locale" content="ko_KR" />
     <meta name="color-scheme" content="light dark" />
     {jsonLd.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
+    {SITE.gaId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.gaId}`}></script>
+        <script is:inline define:vars={{ gaId: SITE.gaId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', gaId);
+        </script>
+      </>
+    )}
     <!-- 구글 서치콘솔/애드센스 인증 태그는 여기에 붙여 넣으세요 -->
   </head>
   <body>

@@ -9,6 +9,8 @@ export const SITE = {
   // 문의용 이메일 (개인정보처리방침·소개 페이지에 표시)
   contactEmail: 'contact@example.com',
   lang: 'ko',
+  // 구글 애널리틱스(GA4) 측정 ID (G-로 시작). 비워 두면 통계 코드를 넣지 않아요.
+  gaId: 'G-BVSVDRXBS8', // 2026-11-23 생성 (속성 coin-guide-blog)
 };
 
 // ★ 비상 스위치: false로 바꾸고 다시 배포하면 사이트의 모든 레퍼럴 링크·광고 고지가 사라지고
